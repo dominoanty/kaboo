@@ -2,17 +2,22 @@ import './Main.scss';
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import { useContext } from 'react';
+import { UserContext } from '../user.context';
+import { createGame } from '../game.service';
 
 
+function Main() {
 
-function Main({startGame}) {
+    let uuid = useContext(UserContext);
     return (
         <div className="App">
             <header className="App-header">
                 Kaboo
             </header>
 
-            <Button className="space-above" onClick={() => startGame(true)}>Host Game</Button>
+            {uuid != null ? uuid.uuid : 'null'}
+            <Button className="space-above" onClick={() => createGame(uuid.uuid)}>Host Game</Button>
             <hr className="hr-text" data-content="OR"></hr>
 
             <InputGroup className="space-above">

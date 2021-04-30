@@ -2,10 +2,9 @@ import logo from './logo.svg';
 import './App.scss';
 import Container from 'react-bootstrap/Container'
 import Main from './main/Main'
-import Card from './card/Card';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button'
-import Hand from './Hand/Hand';
+import Hand from './components/hand/Hand';
 
 const DECK_SIZE = 55;
 
