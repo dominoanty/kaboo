@@ -2,9 +2,10 @@ import logo from './logo.svg';
 import './App.scss';
 import Container from 'react-bootstrap/Container'
 import Main from './main/Main'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button'
 import Hand from './components/hand/Hand';
+import { GameContext } from './game.context';
 
 const DECK_SIZE = 55;
 
@@ -23,19 +24,19 @@ function generateHand() {
 
 function App() {
 
-  let [gameStarted, startGame] = useState(false);
+  let {gameState} = useContext(GameContext);
   let [cardNum, setCardNum] = useState(randomize()); 
 
   return (
     <Container className="App">
       {
-        gameStarted ? 
+        gameState != null ? 
         <div>
           <Hand hand={generateHand()}/>
           <Button className="space-above" onClick={() => setCardNum(randomize())}> Randomize Card </Button>
         </div>
         :
-         <Main startGame={startGame}/>
+         <Main/>
       }
     </Container>
   );

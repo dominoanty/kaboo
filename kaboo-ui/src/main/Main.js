@@ -5,11 +5,21 @@ import Button from 'react-bootstrap/Button'
 import { useContext } from 'react';
 import { UserContext } from '../user.context';
 import { createGame } from '../game.service';
+import { GameContext } from '../game.context';
+import socket from '../socket.service';
 
 
 function Main() {
 
     let uuid = useContext(UserContext);
+    let {gameState, setGameState} = useContext(GameContext);
+
+    let startGame = async () => {
+        let response = await createGame(uuid);
+        console.log('Game is ', response);
+        setGameState(response);
+        socket.emit('game created',{"wsId": response.wsId, "gameId": response.gameId});
+    }
     return (
         <div className="App">
             <header className="App-header">
@@ -17,7 +27,7 @@ function Main() {
             </header>
 
             {uuid != null ? uuid.uuid : 'null'}
-            <Button className="space-above" onClick={() => createGame(uuid.uuid)}>Host Game</Button>
+            <Button className="space-above" onClick={startGame}>Host Game</Button>
             <hr className="hr-text" data-content="OR"></hr>
 
             <InputGroup className="space-above">

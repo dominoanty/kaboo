@@ -5,13 +5,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserProvider } from "./user.context";
-import { useState } from 'react';
-
+import { useState } from "react";
+import { GameProvider } from "./game.context";
 
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <App/>
+      <GameProvider>
+        <App />
+      </GameProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")
